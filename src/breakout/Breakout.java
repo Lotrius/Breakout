@@ -18,28 +18,31 @@ import javafx.stage.Stage;
  * @author Solomon
  */
 public class Breakout extends Application {
-    
+    private MainMenuGUI mmg;
+
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("HIIIIIIIIIIIIIII!");
-                System.out.println("lol u woulda thot!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Goodbye Cruel World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+//        Button btn = new Button();
+//        btn.setText("Say 'Hello World'");
+//        btn.setOnAction(new EventHandler<ActionEvent>() {
+//            
+//            @Override
+//            public void handle(ActionEvent event) {
+//                System.out.println("HIIIIIIIIIIIIIII!");
+//                System.out.println("lol u woulda thot!");
+//            }
+//        });
+//        
+//        StackPane root = new StackPane();
+//        root.getChildren().add(btn);
+//        
+//        Scene scene = new Scene(root, 300, 250);
+//        
+//        primaryStage.setTitle("Goodbye Cruel World!");
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+            mmg = new MainMenuGUI();
+            mmg.initMainMenuGUI(primaryStage);
     }
 
     /**
@@ -48,5 +51,5 @@ public class Breakout extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
