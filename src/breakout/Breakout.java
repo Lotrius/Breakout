@@ -36,7 +36,7 @@ public class Breakout extends Application {
         
         Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Goodbye Cruel World!");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
