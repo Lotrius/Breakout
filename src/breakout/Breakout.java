@@ -27,11 +27,8 @@ public class Breakout extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-<<<<<<< HEAD
                 System.out.println("HIIIIIIIIIIIIIII!");
-=======
                 System.out.println("lol u woulda thot!");
->>>>>>> origin/master
             }
         });
         
