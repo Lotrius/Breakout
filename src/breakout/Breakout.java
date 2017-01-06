@@ -27,7 +27,11 @@ public class Breakout extends Application {
             
             @Override
             public void handle(ActionEvent event) {
+<<<<<<< HEAD
                 System.out.println("HIIIIIIIIIIIIIII!");
+=======
+                System.out.println("lol u woulda thot!");
+>>>>>>> origin/master
             }
         });
         
@@ -36,7 +40,7 @@ public class Breakout extends Application {
         
         Scene scene = new Scene(root, 300, 250);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Goodbye Cruel World!");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
