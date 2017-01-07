@@ -18,12 +18,13 @@ import javafx.stage.Stage;
  * @author Solomon
  */
 public class Breakout extends Application {
+
     private MainMenuGUI mmg;
 
     @Override
     public void start(Stage primaryStage) {
-            mmg = new MainMenuGUI();
-            mmg.initMainMenuGUI(primaryStage);
+        mmg = new MainMenuGUI();
+        mmg.initMainMenuGUI(primaryStage);
     }
 
     /**
