@@ -112,8 +112,7 @@ public class MainMenuGUI {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("HIIIIIIIIIIIIIII!");
-                System.out.println("lol u woulda thot!");
+                primaryStage.close();
             }
         });
 
