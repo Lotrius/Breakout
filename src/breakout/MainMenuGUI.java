@@ -10,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Light;
@@ -43,13 +42,6 @@ public class MainMenuGUI {
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
 
-
-        /*
-        // Is this necessary
-        game = new Canvas(bounds.getWidth(), bounds.getHeight());
-        sp.getChildren().add(game);
-         */
-        
         // All this for a damn title
         final Label titles = new Label("BREAKOUT");
         titles.setFont(Font.font(java.awt.Font.SERIF, FontWeight.EXTRA_BOLD, FONT_SIZE));
@@ -70,36 +62,38 @@ public class MainMenuGUI {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("HIIIIIIIIIIIIIII!");
-                System.out.println("lol u woulda thot!");
+                GameGUI gg;
+                gg = new GameGUI(primaryStage);
             }
         });
-        
+
         // Options button
         Button options = new Button();
         options.setText("Options");
         options.setMaxWidth(BUTTON_WIDTH);
         options.setStyle(BUTTON_STYLE);
         options.setOnAction(new EventHandler<ActionEvent>() {
+            int i = 1;
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("HIIIIIIIIIIIIIII!");
-                System.out.println("lol u woulda thot!");
+                options.setText(Integer.toString(i));
+                i++;
             }
         });
-        
+
         // Scoreboard button
         Button scores = new Button();
         scores.setText("Scoreboard");
         scores.setMaxWidth(BUTTON_WIDTH);
         scores.setStyle(BUTTON_STYLE);
         scores.setOnAction(new EventHandler<ActionEvent>() {
+            int i = 1;
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("HIIIIIIIIIIIIIII!");
-                System.out.println("lol u woulda thot!");
+                scores.setText(Integer.toString(i));
+                i++;
             }
         });
 
@@ -135,10 +129,10 @@ public class MainMenuGUI {
 
         // Set up and go
         primaryStage.setTitle("Breakout");
-        
+
         // Debatable if we should do this or not
-        //primaryStage.setResizable(false);
-        
+        primaryStage.setResizable(false);
+
         primaryStage.setX(bounds.getMinX());
         primaryStage.setY(bounds.getMinY());
         primaryStage.setWidth(bounds.getWidth());
