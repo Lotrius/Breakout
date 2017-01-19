@@ -159,7 +159,6 @@ public class GameGUI {
         s.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.ESCAPE) {
-                    started = false;
                     if (!sp.getChildren().contains(dimP)) {
                         sp.getChildren().add(dimP);
                         sp.getChildren().add(menuSP);
@@ -241,6 +240,7 @@ public class GameGUI {
                                     e.getY() < 97.5) {
                                 sp.getChildren().remove(dimP);
                                 sp.getChildren().remove(menuSP);
+                                started = true;
                             }
                             else if (e.getX() > 5 &&
                                     e.getX() < 295 &&
@@ -267,14 +267,15 @@ public class GameGUI {
                         sp.getChildren().remove(menuSP);
                     }
 
+                    started = false;
                 }
             }
         });
     }
 
     private void initGameStart() {
-        if (!started) {
-            game.setOnMouseClicked(e -> {
+        game.setOnMouseClicked(e -> {
+            if (!started) {
                 new AnimationTimer() {
                     @Override
                     public void handle(long now) {
@@ -329,8 +330,8 @@ public class GameGUI {
                     }
                 }.start();
                 started = true;
-            });
-        }
+            }
+        });
     }
     private void startNewGame() {
         started = false;
