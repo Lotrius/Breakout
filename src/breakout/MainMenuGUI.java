@@ -27,6 +27,7 @@ import javafx.stage.Stage;
  */
 public class MainMenuGUI {
 
+    StackPane sp = new StackPane();
     private Scene s;
     // private Canvas game;
 
@@ -73,12 +74,10 @@ public class MainMenuGUI {
         options.setMaxWidth(BUTTON_WIDTH);
         options.setStyle(BUTTON_STYLE);
         options.setOnAction(new EventHandler<ActionEvent>() {
-            int i = 1;
 
             @Override
             public void handle(ActionEvent event) {
-                options.setText(Integer.toString(i));
-                i++;
+                OptionsGUI og = new OptionsGUI(sp);
             }
         });
 
@@ -88,12 +87,10 @@ public class MainMenuGUI {
         scores.setMaxWidth(BUTTON_WIDTH);
         scores.setStyle(BUTTON_STYLE);
         scores.setOnAction(new EventHandler<ActionEvent>() {
-            int i = 1;
 
             @Override
             public void handle(ActionEvent event) {
-                scores.setText(Integer.toString(i));
-                i++;
+                ScoreboardGUI sg = new ScoreboardGUI(sp);
             }
         });
 
@@ -106,7 +103,7 @@ public class MainMenuGUI {
 
             @Override
             public void handle(ActionEvent event) {
-                primaryStage.close();
+                System.exit(0);
             }
         });
 
@@ -116,7 +113,6 @@ public class MainMenuGUI {
         vb.setAlignment(Pos.CENTER);
 
         // Stackpane cause 
-        StackPane sp = new StackPane();
         sp.getChildren().add(vb);
         StackPane.setAlignment(vb, Pos.CENTER);
 
@@ -138,6 +134,8 @@ public class MainMenuGUI {
         primaryStage.setWidth(bounds.getWidth());
         primaryStage.setHeight(bounds.getHeight());
         primaryStage.setScene(s);
+        primaryStage.setOnCloseRequest(e ->
+        System.exit(0));
         primaryStage.show();
     }
 }
