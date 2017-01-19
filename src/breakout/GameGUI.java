@@ -159,6 +159,7 @@ public class GameGUI {
         s.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.ESCAPE) {
+                    started = false;
                     if (!sp.getChildren().contains(dimP)) {
                         sp.getChildren().add(dimP);
                         sp.getChildren().add(menuSP);
