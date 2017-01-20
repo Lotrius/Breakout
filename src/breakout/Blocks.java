@@ -17,7 +17,7 @@ import javafx.stage.Screen;
  */
 public class Blocks{
     final int BLOCK_WIDTH = 120;
-    final int BLOCK_HEIGHT = 50;
+    final int BLOCK_HEIGHT = 25;
     
     Screen screen = Screen.getPrimary();
     Rectangle2D bounds = screen.getVisualBounds();
@@ -25,17 +25,22 @@ public class Blocks{
     ArrayList<Rectangle> blocks = new ArrayList<>();
     
     public ArrayList<Rectangle> createArray() {
-        int i;
-        int start = 0;
+        int i,y;
+        int horizStart = 0;
+        int vertStart = 100;
         
-        for(i = 0; i <= 16; i++) {
-            Rectangle rect = new Rectangle(start, 500, BLOCK_WIDTH, BLOCK_HEIGHT);
-            rect.setFill(Color.BLUE);
-            rect.setStroke(Color.RED);
-            blocks.add(rect);
-            start += BLOCK_WIDTH;
+        for (y = 0; y < 5; y++) {
+            for (i = 0; i < 16; i++) {
+                Rectangle rect = new Rectangle(horizStart, vertStart, BLOCK_WIDTH, BLOCK_HEIGHT);
+                rect.setFill(Color.BLUE);
+                rect.setStroke(Color.RED);
+                blocks.add(rect);
+                horizStart += BLOCK_WIDTH;
+            }
+            vertStart += BLOCK_HEIGHT;
+            horizStart = 0;
         }
-       
+
         return blocks;
     }
 }
