@@ -5,6 +5,7 @@
  */
 package breakout;
 
+import java.io.File;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -21,19 +22,21 @@ import javafx.scene.input.MouseEvent;
 //import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
  *
  * @author Solomon
  */
 public class GameGUI {
+    ArrayList<Rectangle> blocks;
     final int PADDLE_WIDTH = 200;
     final int PADDLE_HEIGHT = 25;
     final int BALL_RADIUS = 10;
@@ -52,6 +55,7 @@ public class GameGUI {
     double ballAngle;
     Circle ball;
     final int BALL_VELOCITY = 15;
+    MediaPlayer mediaPlayer;
 
     public GameGUI(Stage primaryStage) {
         started = false;
@@ -69,6 +73,11 @@ public class GameGUI {
         s = new Scene(sp, bounds.getWidth(), bounds.getHeight());
         initESCMenu();
         initGameStart();
+        
+        String musicFile = "SFX.wav";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        mediaPlayer = new MediaPlayer(sound);
+        
         
         pStage = primaryStage;
         primaryStage.setX(bounds.getMinX());
@@ -123,7 +132,7 @@ public class GameGUI {
         });
         
         Blocks bl = new Blocks();
-        ArrayList<Rectangle> blocks = bl.createArray();
+        blocks = bl.createArray();
         for(Rectangle rect : blocks) {
             game.getChildren().add(rect);
         }
@@ -293,6 +302,9 @@ public class GameGUI {
                             ball.setCenterY(ballY - (Math.sin(radAngle)) * BALL_VELOCITY);
                         
                             if (ball.getCenterX() <= 0 + ball.getRadius()) {
+                                mediaPlayer.seek(mediaPlayer.getStartTime());
+                                mediaPlayer.play();
+                                ballX = 0 + ball.getRadius();
                                 if (ballAngle < 180) {
                                     ballAngle = 180 - ballAngle;
                                 }
@@ -301,6 +313,9 @@ public class GameGUI {
                                 }
                             }
                             if (ball.getCenterX() >= bounds.getWidth() - ball.getRadius()) {
+                                mediaPlayer.seek(mediaPlayer.getStartTime());
+                                mediaPlayer.play();
+                                ballX = bounds.getWidth() - ball.getRadius();
                                 if (ballAngle < 90) {
                                     ballAngle = 180 - ballAngle;
                                 }
@@ -309,6 +324,9 @@ public class GameGUI {
                                 }
                             }
                             if (ball.getCenterY() <= 0 + ball.getRadius()) {
+                                mediaPlayer.seek(mediaPlayer.getStartTime());
+                                mediaPlayer.play();
+                                ballY = 0 + ball.getRadius();
                                 if (ballAngle < 90) {
                                     ballAngle = ballAngle - 2 * ballAngle;
                                 }
@@ -318,10 +336,110 @@ public class GameGUI {
                             }
                             if (ball.getCenterX() >= paddle.getX() && 
                                     ball.getCenterX() <= (paddle.getX() + PADDLE_WIDTH) &&
-                                    ball.getCenterY() + BALL_RADIUS <= paddle.getY() + BALL_RADIUS /2 &&
-                                    ball.getCenterY() + BALL_RADIUS >= paddle.getY() - BALL_RADIUS) {
+                                    ball.getCenterY() + BALL_RADIUS <= paddle.getY() + 3 &&
+                                    ball.getCenterY() + BALL_RADIUS >= paddle.getY()) {
+                                mediaPlayer.seek(mediaPlayer.getStartTime());
+                                mediaPlayer.play();
                                 ballAngle = 180 - (((ball.getCenterX() - paddle.getX()) * .8) + 10);
-                            }                        
+                            }        
+                            int i = 0;
+                            for (Rectangle r: blocks) {
+                                double xAxis = r.getX();
+                                double yAxis = r.getY();
+                                if (ball.getCenterX() + 10 >= xAxis &&
+                                        ball.getCenterX() + 10 <= xAxis + 120 &&
+                                        ball.getCenterY() + 10 >= yAxis + 10 &&
+                                        ball.getCenterY() + 10 <= yAxis + 25) {
+                                    mediaPlayer.seek(mediaPlayer.getStartTime());
+                                    mediaPlayer.play();
+                                    game.getChildren().remove(blocks.get(i));
+                                    if (ballAngle < 90) {
+                                    ballAngle = ballAngle - 2 * ballAngle;
+                                }
+                                else {
+                                    ballAngle = 360 - ballAngle;
+                                }
+                                    blocks.remove(i);
+                                    i--;
+                                    break;
+                                }
+                                i++;
+                            }
+                            
+                            for (Rectangle r: blocks) {
+                                double xAxis = r.getX();
+                                double yAxis = r.getY();
+                                if (ball.getCenterX() + 10 >= xAxis &&
+                                        ball.getCenterX() + 10 <= xAxis + 15 &&
+                                        ball.getCenterY() + 10 >= yAxis &&
+                                        ball.getCenterY() + 10 <= yAxis + 25) {
+                                    mediaPlayer.seek(mediaPlayer.getStartTime());
+                                    mediaPlayer.play();
+                                    ballX = xAxis;
+                                    game.getChildren().remove(blocks.get(i));
+                                    if (ballAngle < 90) {
+                                    ballAngle = 180 - ballAngle;
+                                }
+                                else {
+                                    ballAngle = 540 - ballAngle;
+                                }
+                                    blocks.remove(i);
+                                    i--;
+                                    break;
+                                }
+                                i++;
+                            }
+                            
+                            
+                            for (Rectangle r: blocks) {
+                                double xAxis = r.getX();
+                                double yAxis = r.getY();
+                                if (ball.getCenterX() + 10 >= xAxis + 105 &&
+                                        ball.getCenterX() + 10 <= xAxis + 120 &&
+                                        ball.getCenterY() + 10 >= yAxis  &&
+                                        ball.getCenterY() + 10 <= yAxis + 25) {
+                                    mediaPlayer.seek(mediaPlayer.getStartTime());
+                                    mediaPlayer.play();
+                                    ballX = xAxis + 120;
+                                    game.getChildren().remove(blocks.get(i));
+                                    if (ballAngle < 180) {
+                                    ballAngle = 180 - ballAngle;
+                                }
+                                else {
+                                    ballAngle = 540 - ballAngle;
+                                }
+                                    blocks.remove(i);
+                                    i--;
+                                    break;
+                                }
+                                i++;
+                            }
+                            
+                            
+                            for (Rectangle r: blocks) {
+                                double xAxis = r.getX();
+                                double yAxis = r.getY();
+                                if (ball.getCenterX() + 10 >= xAxis &&
+                                        ball.getCenterX() + 10 <= xAxis + 120 &&
+                                        ball.getCenterY() + 10 >= yAxis  &&
+                                        ball.getCenterY() + 10 <= yAxis + 15) {
+                                    mediaPlayer.seek(mediaPlayer.getStartTime());
+                                    mediaPlayer.play();
+                                    game.getChildren().remove(blocks.get(i));
+                                    if (ballAngle < 270) {
+                                    ballAngle = 360 - ballAngle;
+                                }
+                                else {
+                                    ballAngle = 360 - ballAngle;
+                                }
+                                    blocks.remove(i);
+                                    i--;
+                                    break;
+                                }
+                                i++;
+                            }
+                            
+                            
                             if (ballAngle >= 360) {
                                 ballAngle = ballAngle - 360;
                             }

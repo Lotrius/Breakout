@@ -66,6 +66,7 @@ public class OptionsGUI {
         SFXS.setMinorTickCount(5);
         SFXS.setOnMouseReleased(e -> {
             SFXVolume = SFXS.getValue() / 100;
+            
         });
         ComboBox resCB = new ComboBox();
         Button xBut = new Button ("X");
