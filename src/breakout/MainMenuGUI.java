@@ -89,19 +89,6 @@ public class MainMenuGUI {
             }
         });
 
-        // Scoreboard button
-        Button scores = new Button();
-        scores.setText("Scoreboard");
-        scores.setMaxWidth(BUTTON_WIDTH);
-        scores.setStyle(BUTTON_STYLE);
-        scores.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                ScoreboardGUI sg = new ScoreboardGUI(sp);
-            }
-        });
-
         // Quit button
         Button quit = new Button();
         quit.setText("Quit");
@@ -117,7 +104,7 @@ public class MainMenuGUI {
 
         // VBOX so that the buttons are directly under eah other lined up
         VBox vb = new VBox(20);
-        vb.getChildren().addAll(play, options, scores, quit);
+        vb.getChildren().addAll(play, options, quit);
         vb.setAlignment(Pos.CENTER);
 
         // Stackpane cause 
@@ -137,6 +124,8 @@ public class MainMenuGUI {
         // Debatable if we should do this or not
         primaryStage.setResizable(false);
         
+        System.out.println(bounds.getWidth());
+
         primaryStage.setX(bounds.getMinX());
         primaryStage.setY(bounds.getMinY());
         primaryStage.setWidth(bounds.getWidth());

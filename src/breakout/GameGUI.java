@@ -5,6 +5,7 @@
  */
 package breakout;
 
+import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
@@ -121,10 +122,15 @@ public class GameGUI {
             }
         });
         
-        sp.getChildren().add(game);
-
+        Blocks bl = new Blocks();
+        ArrayList<Rectangle> blocks = bl.createArray();
+        for(Rectangle rect : blocks) {
+            game.getChildren().add(rect);
+        }
+        
         game.getChildren().addAll(paddle, ball);
-
+        
+        sp.getChildren().add(game);
     }
     private void initESCMenu () {
         dimP.setStyle("-fx-background-color: grey");
