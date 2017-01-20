@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -27,10 +28,11 @@ import javafx.stage.StageStyle;
  * @author Solomon
  */
 public class OptionsGUI {
-    public OptionsGUI (StackPane sp) {
+    private double SFXVolume = 100;
+    public OptionsGUI (StackPane sp, MediaPlayer background) {
         Stage stage = new Stage();
         StackPane sp1 = new StackPane();
-        sp1.setStyle("-fx-background-color: blue");
+        sp1.setStyle("-fx-background-color: hotpink");
         BorderPane bp = new BorderPane();
         VBox leftV = new VBox();
         leftV.setSpacing(30);
@@ -47,7 +49,24 @@ public class OptionsGUI {
         Label backMus = new Label("Background Music");
         Label SFXMus = new Label("SFX Music");
         Slider backS = new Slider(0, 100, 1);
+        backS.setValue(100);
+        backS.setShowTickLabels(true);
+        backS.setShowTickMarks(true);
+        backS.setMajorTickUnit(50);
+        backS.setMinorTickCount(5);
+        backS.setOnMouseReleased(e -> {
+            double volume = backS.getValue() / 100;
+            background.setVolume(volume);
+        });
         Slider SFXS = new Slider(0, 100, 1);
+        SFXS.setValue(100);
+        SFXS.setShowTickLabels(true);
+        SFXS.setShowTickMarks(true);
+        SFXS.setMajorTickUnit(50);
+        SFXS.setMinorTickCount(5);
+        SFXS.setOnMouseReleased(e -> {
+            SFXVolume = SFXS.getValue() / 100;
+        });
         ComboBox resCB = new ComboBox();
         Button xBut = new Button ("X");
         xBut.setStyle("-fx-background-color: transparent");
@@ -74,4 +93,7 @@ public class OptionsGUI {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }    
+    public double getSFXVolume () {
+        return SFXVolume;
+    }
 }

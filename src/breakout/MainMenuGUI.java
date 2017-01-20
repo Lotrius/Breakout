@@ -5,6 +5,7 @@
  */
 package breakout;
 
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -16,6 +17,8 @@ import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.stage.Screen;
@@ -68,6 +71,11 @@ public class MainMenuGUI {
             }
         });
 
+        String musicFile = "Background.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+        
         // Options button
         Button options = new Button();
         options.setText("Options");
@@ -77,7 +85,7 @@ public class MainMenuGUI {
 
             @Override
             public void handle(ActionEvent event) {
-                OptionsGUI og = new OptionsGUI(sp);
+                OptionsGUI og = new OptionsGUI(sp, mediaPlayer);
             }
         });
 
